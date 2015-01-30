@@ -8,14 +8,20 @@ using System.Web.Security;
 
 namespace RIO.Models
 {
-    public class UsersContext : DbContext
+    public class RIOContext : DbContext
     {
-        public UsersContext()
+        public RIOContext()
             : base("DefaultConnection")
         {
         }
 
-        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserProfile> UserProfile { get; set; }
+
+        public DbSet<Country> Country { get; set; }
+
+        public DbSet<State> State { get; set; }
+
+        public DbSet<City> City { get; set; }
     }
 
     [Table("UserProfile")]

@@ -25,11 +25,11 @@ namespace RIO.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<RIOContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new RIOContext())
                     {
                         if (!context.Database.Exists())
                         {
