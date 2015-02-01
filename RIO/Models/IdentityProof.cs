@@ -8,23 +8,21 @@ using System.Web;
 
 namespace RIO.Models
 {
-    [Table("Country")]
-    public class Country
+    [Table("IdentityProof")]
+    public class IdentityProof
     {
 
         #region Public Properties
 
-        public int CountryId { get; set; }
+        public int IdentityProofId { get; set; }
 
-        [DisplayName("Country")]
+        [DisplayName("Identity Proof")]
         [Required]
-        [StringLength(250)]
-        public string CountryName { get; set; }
+        [StringLength(500)]
+        public string Name { get; set; }
 
         [DisplayName("Sort Order")]
         public int SortOrder { get; set; }
-
-        public virtual ICollection<State> States { get; set; }
 
         [DefaultValue(true)]
         public bool IsActive { get; set; }

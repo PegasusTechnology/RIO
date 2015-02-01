@@ -265,12 +265,12 @@ namespace RIO.Controllers
                 // Insert a new user into the database
                 using (RIOContext db = new RIOContext())
                 {
-                    UserProfile user = db.UserProfile.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    User user = db.User.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfile.Add(new UserProfile { UserName = model.UserName });
+                        db.User.Add(new User { UserName = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

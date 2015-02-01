@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,13 +12,24 @@ namespace RIO.Models
     public class City
     {
 
-        public int CityID { get; set; }
+        #region Public Properties
 
-        public int StateID { get; set; }
+        public int CityId { get; set; }
 
-        [StringLength(250)]
+        public int StateId { get; set; }
+
+        [DisplayName("City")]
         [Required]
+        [StringLength(250)]
         public string CityName { get; set; }
+
+        [DisplayName("Sort Order")]
+        public int SortOrder { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
+
+        #endregion
 
     }
 }

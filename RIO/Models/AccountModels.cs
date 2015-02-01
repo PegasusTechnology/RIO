@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -15,22 +16,89 @@ namespace RIO.Models
         {
         }
 
-        public DbSet<UserProfile> UserProfile { get; set; }
+        public DbSet<User> User { get; set; }
+
+        public DbSet<Address> Address { get; set; }
+
+        public DbSet<Brand> Brand { get; set; }
+
+        public DbSet<Category> Category { get; set; }
+
+        public DbSet<City> City { get; set; }
+
+        public DbSet<Costing> Costing { get; set; }
 
         public DbSet<Country> Country { get; set; }
 
+        public DbSet<EmailTemplate> EmailTemplate { get; set; }
+
+        public DbSet<IdentityProof> IdentityProof { get; set; }
+
+        public DbSet<Item> Item { get; set; }
+
+        public DbSet<ItemImage> ItemImage { get; set; }
+
+        public DbSet<ItemRequiredDocument> ItemRequiredDocument { get; set; }
+
+        public DbSet<RIOConfiguration> RIOConfiguration { get; set; }
+
         public DbSet<State> State { get; set; }
 
-        public DbSet<City> City { get; set; }
+        public DbSet<UsageLog> UsageLog { get; set; }
+
+        public DbSet<UserRating> UserRating { get; set; }
+
     }
 
-    [Table("UserProfile")]
-    public class UserProfile
+    [Table("User")]
+    public class User
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+
+        #region Public Properties
+
         public int UserId { get; set; }
+
+        [DisplayName("User Name")]
+        [Required]
+        [StringLength(500)]
         public string UserName { get; set; }
+
+        [DisplayName("First Name")]
+        [Required]
+        [StringLength(500)]
+        public string FirstName { get; set; }
+
+        [DisplayName("Last Name")]
+        [Required]
+        [StringLength(500)]
+        public string LastName { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [DisplayName("Email")]
+        [Required]
+        public string EmailId { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Date of Birth")]
+        [Required]
+        public DateTime DateOfBirth { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [DisplayName("Phone")]
+        public int Phone { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        [StringLength(500)]
+        public string Photo { get; set; }
+
+        [NotMapped]
+        public int KarmaPoint { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
+
+        #endregion
+
     }
 
     public class RegisterExternalLoginModel
