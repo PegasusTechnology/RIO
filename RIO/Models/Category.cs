@@ -8,23 +8,27 @@ using System.Web;
 
 namespace RIO.Models
 {
-    [Table("Country")]
-    public class Country
+    [Table("Category")]
+    public class Category
     {
 
         #region Public Properties
 
-        public int CountryId { get; set; }
+        public int CategoryId { get; set; }
 
-        [DisplayName("Country")]
+        [DisplayName("Category")]
         [Required]
-        [StringLength(250)]
-        public string CountryName { get; set; }
+        [StringLength(1000)]
+        public string CategoryName { get; set; }
 
         [DisplayName("Sort Order")]
         public int SortOrder { get; set; }
 
-        public virtual ICollection<State> States { get; set; }
+        [DisplayName("Hierarchy Level")]
+        public int HierarchyLevel { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public int? ParentCategoryId { get; set; }
 
         [DefaultValue(true)]
         public bool IsActive { get; set; }
