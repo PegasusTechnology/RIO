@@ -9,7 +9,7 @@ namespace RIO.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(RIO.Models.RIOContext context)

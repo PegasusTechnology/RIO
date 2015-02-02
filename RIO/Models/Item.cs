@@ -16,9 +16,18 @@ namespace RIO.Models
 
         public int ItemId { get; set; }
 
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+
         public Category Category { get; set; }
 
+        [ForeignKey("Brand")]
+        public int BrandId { get; set; }
+
         public Brand Brand { get; set; }
+
+        [ForeignKey("Address")]
+        public int AddressId { get; set; }
 
         public Address Address { get; set; }
 
@@ -40,7 +49,7 @@ namespace RIO.Models
         [DisplayName("Posted Date")]
         public DateTime PostedDate { get; set; }
 
-        public ICollection<Costing> Costing { get; set; }
+        public ICollection<ItemCosting> ItemCosting { get; set; }
 
         public ICollection<ItemRequiredDocument> RequiredDocuments { get; set; }
 

@@ -16,7 +16,10 @@ namespace RIO.Models
 
         public int AddressId { get; set; }
 
+        [ForeignKey("User")]
         public int UserId { get; set; }
+
+        public User User { get; set; }
 
         [DisplayName("Address Line 1")]
         [Required]

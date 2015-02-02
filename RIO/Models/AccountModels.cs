@@ -36,7 +36,11 @@ namespace RIO.Models
 
         public DbSet<Item> Item { get; set; }
 
+        public DbSet<ItemCosting> ItemCosting { get; set; }
+
         public DbSet<ItemImage> ItemImage { get; set; }
+
+        public DbSet<ItemRequest> ItemRequest { get; set; }
 
         public DbSet<ItemRequiredDocument> ItemRequiredDocument { get; set; }
 
