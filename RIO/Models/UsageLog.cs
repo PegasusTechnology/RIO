@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RIO.Models
 {
-    [Table("Configuration")]
+    [Table("UsageLog")]
     public class UsageLog
     {
 

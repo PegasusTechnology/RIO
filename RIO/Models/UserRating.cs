@@ -20,6 +20,7 @@ namespace RIO.Models
 
         public int Rating { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Comment { get; set; }
 
         public bool ThumbsUp { get; set; }

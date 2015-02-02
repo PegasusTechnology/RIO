@@ -22,13 +22,12 @@ namespace RIO.Models
 
         public Address Address { get; set; }
 
-        public Costing Costing { get; set; }
-
         [DisplayName("Item Name")]
         [Required]
         [StringLength(150)]
         public string ItemName { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [DisplayName("Item Description")]
         [StringLength(1000)]
         public string ItemDescription { get; set; }
@@ -40,6 +39,8 @@ namespace RIO.Models
         [DataType(DataType.Date)]
         [DisplayName("Posted Date")]
         public DateTime PostedDate { get; set; }
+
+        public ICollection<Costing> Costing { get; set; }
 
         public ICollection<ItemRequiredDocument> RequiredDocuments { get; set; }
 

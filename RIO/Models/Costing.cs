@@ -8,7 +8,7 @@ using System.Web;
 
 namespace RIO.Models
 {
-    [Table("IdentityProof")]
+    [Table("Costing")]
     public class Costing
     {
 
