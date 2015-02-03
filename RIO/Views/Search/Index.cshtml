@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RIO.Models.Item>
+
+@{
+    ViewBag.Title = "RIO - Search Item";
+}
+
+<h2>Search Item</h2>
+
+<form method="get">
+    <input type="text" name="itemName" />
+    <input type="submit" value="Search" />
+</form>
+@if (Model.Count() != 0)
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand.BrandName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Address.Country.CountryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.State.StateName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.City.CityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostedDate)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.ItemName, "Details", new { id = item.ItemId });               
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.Country.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.State.StateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.City.CityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostedDate)
+                </td>
+            </tr>
+        }
+
+    </table>
+}

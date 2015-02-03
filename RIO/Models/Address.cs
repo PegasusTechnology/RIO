@@ -19,7 +19,7 @@ namespace RIO.Models
         [ForeignKey("User")]
         public int UserId { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [DisplayName("Address Line 1")]
         [Required]
@@ -39,11 +39,20 @@ namespace RIO.Models
         [Required]
         public int PinCode { get; set; }
 
+        [ForeignKey("Country")]
         public int CountryId { get; set; }
 
+        public virtual Country Country { get; set; }
+
+        [ForeignKey("State")]
         public int StateId { get; set; }
 
+        public virtual State State { get; set; }
+
+        [ForeignKey("City")]
         public int CityId { get; set; }
+
+        public virtual City City { get; set; }
 
         [DisplayName("Set As Default")]
         public bool IsDefault { get; set; }
