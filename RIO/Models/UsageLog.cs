@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RIO.Models
 {
-    [Table("Configuration")]
+    [Table("UsageLog")]
     public class UsageLog
     {
 
@@ -15,7 +15,10 @@ namespace RIO.Models
 
         public int UsageLogId { get; set; }
 
+        [ForeignKey("User")]
         public int UserId { get; set; }
+
+        public User User { get; set; }
 
         [DataType(DataType.Url)]
         [StringLength(500)]

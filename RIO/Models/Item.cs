@@ -16,19 +16,27 @@ namespace RIO.Models
 
         public int ItemId { get; set; }
 
-        public Category Category { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
 
-        public Brand Brand { get; set; }
+        public virtual Category Category { get; set; }
 
-        public Address Address { get; set; }
+        [ForeignKey("Brand")]
+        public int BrandId { get; set; }
 
-        public Costing Costing { get; set; }
+        public virtual Brand Brand { get; set; }
+
+        [ForeignKey("Address")]
+        public int AddressId { get; set; }
+
+        public virtual Address Address { get; set; }
 
         [DisplayName("Item Name")]
         [Required]
         [StringLength(150)]
         public string ItemName { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [DisplayName("Item Description")]
         [StringLength(1000)]
         public string ItemDescription { get; set; }
@@ -41,9 +49,11 @@ namespace RIO.Models
         [DisplayName("Posted Date")]
         public DateTime PostedDate { get; set; }
 
-        public ICollection<ItemRequiredDocument> RequiredDocuments { get; set; }
+        public virtual ICollection<ItemCosting> ItemCosting { get; set; }
 
-        public ICollection<ItemImage> Images { get; set; }
+        public virtual ICollection<ItemRequiredDocument> RequiredDocuments { get; set; }
+
+        public virtual ICollection<ItemImage> Images { get; set; }
 
         [DefaultValue(true)]
         public bool IsActive { get; set; }

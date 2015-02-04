@@ -13,6 +13,8 @@ namespace RIO.Models
 
         #region Public Properties
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ConfigurationId { get; set; }
 
         [Required]

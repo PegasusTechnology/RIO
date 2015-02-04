@@ -18,25 +18,28 @@ namespace RIO.Models
 
         [Required]
         [StringLength(150)]
-        public string EmailTemplateCode { get; set; }
+        public string TemplateCode { get; set; }
 
         [StringLength(150)]
-        public string EmailFrom { get; set; }
+        public string From { get; set; }
 
         [StringLength(1000)]
-        public string EmailTo { get; set; }
+        public string To { get; set; }
 
         [StringLength(1000)]
-        public string EmailCc { get; set; }
+        public string Cc { get; set; }
 
         [StringLength(1000)]
-        public string EmailBcc { get; set; }
+        public string Bcc { get; set; }
 
         [StringLength(500)]
-        public string EmailSubject { get; set; }
+        public string Subject { get; set; }
 
         [DataType(DataType.Html)]
-        public string EmailBody { get; set; }
+        public string Body { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
 
         #endregion
 

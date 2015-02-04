@@ -16,10 +16,14 @@ namespace RIO.Models
 
         public int UserRatingId { get; set; }
 
+        [ForeignKey("User")]
         public int UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public int Rating { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Comment { get; set; }
 
         public bool ThumbsUp { get; set; }
