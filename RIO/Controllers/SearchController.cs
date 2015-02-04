@@ -16,11 +16,15 @@ namespace RIO.Controllers
         //
         // GET: /Search/
 
-        public ActionResult Index(string itemName = null)
+        public ActionResult Index(string itemName = null, string category = null)
         {
-            var item = db.Item.Where(p => p.ItemName.Contains(itemName));
+            SearchViewModel model = new SearchViewModel();
+            model.Categories = db.Category.AsEnumerable();
+            int categoryId = Convert.ToInt32(((string.IsNullOrEmpty(category)) ? null : category));
+            model.Items = db.Item.Where(p => p.ItemName.Contains(itemName) &&
+                (p.CategoryId == categoryId || category == string.Empty));
 
-            return View(item.ToList());
+            return View(model);
         }
 
         //
