@@ -1,40 +1,72 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿@model  SearchViewModel
 
 @section featured {
-  <div class="jumbotron">
-    <div class="container">
-      <h1>@ViewBag.Title.</h1>
-      <h2>@ViewBag.Message</h2>
-      <p>
-      To learn more about ASP.NET MVC visit
+    <div class="jumbotron">
+        <div class="container">
+            <p>
+                To learn more about ASP.NET MVC visit
       <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
       The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-      If you have any questions about ASP.NET MVC visit</p>
-      <a class="btn btn-large btn-success" href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+      If you have any questions about ASP.NET MVC visit
+            </p>
+            <a class="btn btn-large btn-success" href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+        </div>
     </div>
-  </div>
 }
+
+<form method="get">
+    @Html.DropDownList("category", new SelectList(Model.Categories, "CategoryId", "CategoryName", @Request.QueryString["category"]), "All Categories")
+    <input type="text" name="itemName" value="@Request.QueryString["itemName"]" />
+    <input type="submit" value="Search" />
+    @Html.ActionLink("Advanced Search", "Index")
+</form>
+
+<br />
+
+@if (Model.Items.Count() != 0)
+{
+    <h3>Matching Items</h3>
+    
+    <div class="row">
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-md-3 col-sm-6">
+                @Html.ActionLink(item.ItemName, "Details", "Search", new { id = item.ItemId }, null);               
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                @Html.DisplayFor(modelItem => item.Address.City.State.Country.CountryName)
+                @Html.DisplayFor(modelItem => item.Address.City.State.StateName)
+                @Html.DisplayFor(modelItem => item.Address.City.CityName)
+                @Html.DisplayFor(modelItem => item.PostedDate)
+            </div>    
+        }
+    </div>
+}
+
+else if (!string.IsNullOrEmpty(@Request.QueryString["itemName"]))
+{
+    <h3>Sorry, No Matching Items</h3>
+}
+
 <!-- Example row of columns -->
 <div class="row">
-  <div class="col-md-4">
-    <h2>Getting Started</h2>
-    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+    <div class="col-md-4">
+        <h2>Getting Started</h2>
+        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
     enables a clean separation of concerns and that gives you full control over markup
     for enjoyable, agile development. ASP.NET MVC includes many features that enable
     fast, TDD-friendly development for creating sophisticated applications that use
     the latest web standards.
     <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more &raquo;</a></p>
-  </div>
-  <div class="col-md-4">
-    <h2>Add NuGet packages and jump-start your coding</h2>
-    <p>NuGet makes it easy to install and update free libraries and tools.</p>
-    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more &raquo;</a></p>
-  </div>
-  <div class="col-md-4">
-    <h2>Find Web Hosting</h2>
-    <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more &raquo;</a></p>
-  </div>
+    </div>
+    <div class="col-md-4">
+        <h2>Add NuGet packages and jump-start your coding</h2>
+        <p>NuGet makes it easy to install and update free libraries and tools.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Find Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more &raquo;</a></p>
+    </div>
 </div>

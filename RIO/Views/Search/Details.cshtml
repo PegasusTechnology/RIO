@@ -1,71 +1,58 @@
-﻿@model RIO.Models.Item
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
+﻿@model Item
 
 <fieldset>
-    <legend>Item</legend>
+    <legend>@Model.ItemName</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Category.CategoryName)
+        @Html.DisplayNameFor(model => model.Category.CategoryName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Category.CategoryName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Brand.BrandName)
+        @Html.DisplayNameFor(model => model.Brand.BrandName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Brand.BrandName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Address.AddressLine1)
+        @Html.DisplayNameFor(model => model.Address.AddressLine1)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Address.AddressLine1)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ItemName)
+        @Html.DisplayNameFor(model => model.ItemName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ItemName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ItemDescription)
+        @Html.DisplayNameFor(model => model.ItemDescription)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ItemDescription)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Phone)
+        @Html.DisplayNameFor(model => model.Phone)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Phone)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.PostedDate)
+        @Html.DisplayNameFor(model => model.PostedDate)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.PostedDate)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.IsActive)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.IsActive)
-    </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ItemId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

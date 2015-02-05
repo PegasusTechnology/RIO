@@ -16,7 +16,10 @@ namespace RIO.Models
 
         public int CityId { get; set; }
 
+        [ForeignKey("State")]
         public int StateId { get; set; }
+
+        public virtual State State { get; set; }
 
         [DisplayName("City")]
         [Required]

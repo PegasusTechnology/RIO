@@ -72,8 +72,6 @@ namespace RIO.Migrations
                       p => p.AddressLine1,
                       new Address
                       {
-                          CountryId = context.Country.FirstOrDefault(p => p.CountryName == "India").CountryId,
-                          StateId = context.State.FirstOrDefault(p => p.StateName == "Kerala").StateId,
                           CityId = context.City.FirstOrDefault(p => p.CityName == "Kochi").CityId,
                           UserId = context.User.FirstOrDefault().UserId,
                           AddressLine1 = "AddressLine1",
@@ -97,6 +95,28 @@ namespace RIO.Migrations
                   PostedDate = DateTime.Now,
                   IsActive = true
               },
+               new Item
+               {
+                   CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Electronics").CategoryId,
+                   BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Bose").BrandId,
+                   AddressId = context.Address.FirstOrDefault().AddressId,
+                   ItemName = "2.1 Speaker System",
+                   ItemDescription = "Bose Imported",
+                   Phone = 123456789,
+                   PostedDate = DateTime.Now,
+                   IsActive = true
+               },
+                new Item
+                {
+                    CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Electronics").CategoryId,
+                    BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Bose").BrandId,
+                    AddressId = context.Address.FirstOrDefault().AddressId,
+                    ItemName = "7.1 Speaker System",
+                    ItemDescription = "Bose Imported",
+                    Phone = 123456789,
+                    PostedDate = DateTime.Now,
+                    IsActive = true
+                },
               new Item
               {
                   CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Camera").CategoryId,
@@ -108,12 +128,67 @@ namespace RIO.Migrations
                   PostedDate = DateTime.Now,
                   IsActive = true
               },
+              new Item
+              {
+                  CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Camera").CategoryId,
+                  BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Canon").BrandId,
+                  AddressId = context.Address.FirstOrDefault().AddressId,
+                  ItemName = "EOS 550D",
+                  ItemDescription = "EOS 550D with 18-55 kit lens and 55-250 telephoto",
+                  Phone = 123456789,
+                  PostedDate = DateTime.Now,
+                  IsActive = true
+              },
+              new Item
+              {
+                  CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Camera").CategoryId,
+                  BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Canon").BrandId,
+                  AddressId = context.Address.FirstOrDefault().AddressId,
+                  ItemName = "EOS 7D Mark II",
+                  ItemDescription = "EOS 7D Mark II with 18-55 kit lens and 55-250 telephoto",
+                  Phone = 123456789,
+                  PostedDate = DateTime.Now,
+                  IsActive = true
+              },
                new Item
                {
                    CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Sports").CategoryId,
                    BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Yonex").BrandId,
                    AddressId = context.Address.FirstOrDefault().AddressId,
                    ItemName = "Voltric 7",
+                   ItemDescription = "Racket",
+                   Phone = 123456789,
+                   PostedDate = DateTime.Now,
+                   IsActive = true
+               },
+               new Item
+               {
+                   CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Sports").CategoryId,
+                   BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Yonex").BrandId,
+                   AddressId = context.Address.FirstOrDefault().AddressId,
+                   ItemName = "Voltric 5",
+                   ItemDescription = "Racket",
+                   Phone = 123456789,
+                   PostedDate = DateTime.Now,
+                   IsActive = true
+               },
+               new Item
+               {
+                   CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Sports").CategoryId,
+                   BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Yonex").BrandId,
+                   AddressId = context.Address.FirstOrDefault().AddressId,
+                   ItemName = "Voltric 3",
+                   ItemDescription = "Racket",
+                   Phone = 123456789,
+                   PostedDate = DateTime.Now,
+                   IsActive = true
+               },
+               new Item
+               {
+                   CategoryId = context.Category.FirstOrDefault(p => p.CategoryName == "Sports").CategoryId,
+                   BrandId = context.Brand.FirstOrDefault(p => p.BrandName == "Yonex").BrandId,
+                   AddressId = context.Address.FirstOrDefault().AddressId,
+                   ItemName = "Voltric 2",
                    ItemDescription = "Racket",
                    Phone = 123456789,
                    PostedDate = DateTime.Now,

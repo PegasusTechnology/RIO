@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RIO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,11 +9,18 @@ namespace RIO.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View();
+        private RIOContext db = new RIOContext();
+
+        public ActionResult Index(string itemName = null, string category = null)
+        {
+            SearchViewModel model = new SearchViewModel();
+            model.Categories = db.Category.AsEnumerable();
+            int categoryId = Convert.ToInt32(((string.IsNullOrEmpty(category)) ? null : category));
+            model.Items = db.Item.Where(p => p.ItemName.Contains(itemName) &&
+                (p.CategoryId == categoryId || category == string.Empty));
+
+            return View(model);
         }
 
         public ActionResult About()
@@ -28,5 +36,22 @@ namespace RIO.Controllers
 
             return View();
         }
+
+        public ActionResult Details(int id = 0)
+        {
+            Item item = db.Item.Find(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+
     }
 }

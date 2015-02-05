@@ -37,17 +37,7 @@ namespace RIO.Models
 
         [DataType(DataType.PostalCode)]
         [Required]
-        public int PinCode { get; set; }
-
-        [ForeignKey("Country")]
-        public int CountryId { get; set; }
-
-        public virtual Country Country { get; set; }
-
-        [ForeignKey("State")]
-        public int StateId { get; set; }
-
-        public virtual State State { get; set; }
+        public int PinCode { get; set; }       
 
         [ForeignKey("City")]
         public int CityId { get; set; }
