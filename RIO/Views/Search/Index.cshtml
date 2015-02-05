@@ -7,15 +7,31 @@
 <h2>Search Item</h2>
 
 <form method="get">
-    @Html.DropDownList("category", new SelectList(Model.Categories, "CategoryId", "CategoryName"), "All Categories")
-    <input type="text" name="itemName" />
+    @Html.DropDownList("category", new SelectList(Model.Categories, "CategoryId", "CategoryName", @Request.QueryString["category"]), "All Categories")
+    <input type="text" name="itemName" value="@Request.QueryString["itemName"]" />
     <input type="submit" value="Search" />
     @Html.ActionLink("Advanced Search", "Index")
 </form>
 
+<br />
+
+@if (Model.Items.Count() != 0)
+{
+    <h3>Matching Items</h3>
+}
+else
+{
+    <h3>Sorry, No Matching Items</h3>
+}
+@{int index = 0;}
 @foreach (var item in Model.Items)
 {
-    <div>
+    index++;
+
+    if (index % 2 != 0)
+    {  
+    @:<div class="row">
+<div class="col-md-6">
         @Html.ActionLink(item.ItemName, "Details", new { id = item.ItemId });               
         @Html.DisplayFor(modelItem => item.Category.CategoryName)
         @Html.DisplayFor(modelItem => item.Brand.BrandName)
@@ -24,4 +40,25 @@
         @Html.DisplayFor(modelItem => item.Address.City.CityName)
         @Html.DisplayFor(modelItem => item.PostedDate)
     </div>
+    }
+    if (index % 2 == 0)
+    {
+    <div class="col-md-6">
+        @Html.ActionLink(item.ItemName, "Details", new { id = item.ItemId });               
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        @Html.DisplayFor(modelItem => item.Brand.BrandName)
+        @Html.DisplayFor(modelItem => item.Address.Country.CountryName)
+        @Html.DisplayFor(modelItem => item.Address.State.StateName)
+        @Html.DisplayFor(modelItem => item.Address.City.CityName)
+        @Html.DisplayFor(modelItem => item.PostedDate)
+    </div> 
+
+    }
+
+    // Logic to close the bootstrap row div
+    if (index % 2 == 0 || (index % 2 != 0 && Model.Items.Count() == index))
+    {
+        @:</div>
+    }
+
 }
