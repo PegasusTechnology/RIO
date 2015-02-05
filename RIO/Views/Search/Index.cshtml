@@ -19,7 +19,7 @@
 {
     <h3>Matching Items</h3>
 }
-else
+else if (!string.IsNullOrEmpty(@Request.QueryString["itemName"]))
 {
     <h3>Sorry, No Matching Items</h3>
 }
