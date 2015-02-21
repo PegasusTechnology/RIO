@@ -16,8 +16,8 @@
 
 <form method="get">
     @Html.DropDownList("category", new SelectList(Model.Categories, "CategoryId", "CategoryName", @Request.QueryString["category"]), "All Categories")
-    <input type="text" name="itemName" value="@Request.QueryString["itemName"]" />
-    <input type="submit" value="Search" />
+    <input type="text" name="itemName" value="@Request.QueryString["itemName"]" placeholder="Item Name"/>
+    <input type="submit" value="Search" class="btn btn-primary" />
     @Html.ActionLink("Advanced Search", "Index")
 </form>
 

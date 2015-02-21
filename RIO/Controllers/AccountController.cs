@@ -240,7 +240,17 @@ namespace RIO.Controllers
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel
+                //{ UserName = result.UserName, ExternalLoginData = loginData }
+                //Inserting additional ConsoleKeyInfo from Ext
+                {
+                    UserName = result.UserName,
+                    ExternalLoginData = loginData,
+                    //FullName = result.ExtraData["name"],
+                    //Link = result.ExtraData["link"]
+                }
+
+                );
             }
         }
 
@@ -270,7 +280,16 @@ namespace RIO.Controllers
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.User.Add(new User { UserName = model.UserName });
+                        //db.User.Add(new User { UserName = model.UserName });
+                        User newUser = db.User.Add(new User { UserName = model.UserName });
+                        db.SaveChanges();
+
+                        db.ExternalUsers.Add(new ExternalUserInformation
+                        {
+                            UserId = newUser.UserId,
+                            FullName = model.FullName,
+                            Link = model.Link
+                        });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

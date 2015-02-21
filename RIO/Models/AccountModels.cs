@@ -53,6 +53,8 @@ namespace RIO.Models
 
         public DbSet<UserRating> UserRating { get; set; }
 
+        public DbSet<ExternalUserInformation> ExternalUsers { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -74,24 +76,24 @@ namespace RIO.Models
         public string UserName { get; set; }
 
         [DisplayName("First Name")]
-        [Required]
+        //[Required]
         [StringLength(500)]
         public string FirstName { get; set; }
 
         [DisplayName("Last Name")]
-        [Required]
+        //[Required]
         [StringLength(500)]
         public string LastName { get; set; }
 
         [DataType(DataType.EmailAddress)]
         [DisplayName("Email")]
-        [Required]
+        //[Required]
         public string EmailId { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Date of Birth")]
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        //[Required]
+        public DateTime? DateOfBirth { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         [DisplayName("Phone")]
@@ -118,6 +120,23 @@ namespace RIO.Models
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
+
+        [Display(Name = "Full name")]
+        public string FullName { get; set; }
+
+        [Display(Name = "Personal page link")]
+        public string Link { get; set; }
+
+    }
+
+    [Table("ExtraUserInformation")]
+    public class ExternalUserInformation
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string FullName { get; set; }
+        public string Link { get; set; }
+        public bool? Verified { get; set; }
     }
 
     public class LocalPasswordModel
