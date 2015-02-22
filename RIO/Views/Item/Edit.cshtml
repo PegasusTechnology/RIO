@@ -1,10 +1,6 @@
 ﻿@model RIO.Models.Item
 
-@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
+<h2>Edit</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -12,6 +8,8 @@
 
     <fieldset>
         <legend>Item</legend>
+
+        @Html.HiddenFor(model => model.ItemId)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.CategoryId, "Category")
@@ -78,7 +76,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>
 }

@@ -18,7 +18,8 @@ namespace RIO.Controllers
             model.Categories = db.Category.AsEnumerable();
             int categoryId = Convert.ToInt32(((string.IsNullOrEmpty(category)) ? null : category));
             model.Items = db.Item.Where(p => p.ItemName.Contains(itemName) &&
-                (p.CategoryId == categoryId || category == string.Empty));
+                (p.CategoryId == categoryId || category == string.Empty) &&
+                p.IsActive);
 
             return View(model);
         }
@@ -35,16 +36,6 @@ namespace RIO.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        public ActionResult Details(int id = 0)
-        {
-            Item item = db.Item.Find(id);
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            return View(item);
         }
 
         protected override void Dispose(bool disposing)

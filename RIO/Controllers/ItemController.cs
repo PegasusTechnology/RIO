@@ -9,26 +9,21 @@ using RIO.Models;
 
 namespace RIO.Controllers
 {
-    public class SearchController : Controller
+    public class ItemController : Controller
     {
         private RIOContext db = new RIOContext();
 
         //
-        // GET: /Search/
+        // GET: /Item/
 
-        public ActionResult Index(string itemName = null, string category = null)
+        public ActionResult Index()
         {
-            SearchViewModel model = new SearchViewModel();
-            model.Categories = db.Category.AsEnumerable();
-            int categoryId = Convert.ToInt32(((string.IsNullOrEmpty(category)) ? null : category));
-            model.Items = db.Item.Where(p => p.ItemName.Contains(itemName) &&
-                (p.CategoryId == categoryId || category == string.Empty));
-
-            return View(model);
+            var item = db.Item.Include(i => i.Category).Include(i => i.Brand).Include(i => i.Address);
+            return View(item.ToList());
         }
 
         //
-        // GET: /Search/Details/5
+        // GET: /Item/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -41,7 +36,7 @@ namespace RIO.Controllers
         }
 
         //
-        // GET: /Search/Create
+        // GET: /Item/Create
 
         public ActionResult Create()
         {
@@ -52,7 +47,7 @@ namespace RIO.Controllers
         }
 
         //
-        // POST: /Search/Create
+        // POST: /Item/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -72,7 +67,7 @@ namespace RIO.Controllers
         }
 
         //
-        // GET: /Search/Edit/5
+        // GET: /Item/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -88,7 +83,7 @@ namespace RIO.Controllers
         }
 
         //
-        // POST: /Search/Edit/5
+        // POST: /Item/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -107,7 +102,7 @@ namespace RIO.Controllers
         }
 
         //
-        // GET: /Search/Delete/5
+        // GET: /Item/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -120,7 +115,7 @@ namespace RIO.Controllers
         }
 
         //
-        // POST: /Search/Delete/5
+        // POST: /Item/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -137,6 +132,5 @@ namespace RIO.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-        
     }
 }
