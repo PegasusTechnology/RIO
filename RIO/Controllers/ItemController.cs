@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RIO.Models;
+using RIO.Models.ViewModels;
 
 namespace RIO.Controllers
 {
@@ -40,10 +41,15 @@ namespace RIO.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Category, "CategoryId", "CategoryName");
-            ViewBag.BrandId = new SelectList(db.Brand, "BrandId", "BrandName");
-            ViewBag.AddressId = new SelectList(db.Address, "AddressId", "AddressLine1");
-            return View();
+            ItemCreateViewModel viewModel = new ItemCreateViewModel();
+
+            viewModel.Category = new SelectList(db.Category, "CategoryId", "CategoryName", "SelectedCategoryId");
+            viewModel.Brand = new SelectList(db.Brand, "BrandId", "BrandName", "SelectedBrandId");
+            viewModel.Address = new SelectList(db.Address, "AddressId", "AddressLine1", "SelectedAddressId");
+            viewModel.Costing = new SelectList(db.Costing, "CostingId", "Name", "SelectedCostingId");
+            viewModel.IdentityProof = new SelectList(db.Costing, "IdentityProofId", "Name", "SelectedIdentityProofId");
+
+            return View(viewModel);
         }
 
         //
@@ -51,19 +57,22 @@ namespace RIO.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Item item)
+        public ActionResult Create(ItemCreateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Item.Add(item);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.Item.Add(viewModel);
+                //db.SaveChanges();
+                return RedirectToAction("Index", "Home", null);
             }
 
-            ViewBag.CategoryId = new SelectList(db.Category, "CategoryId", "CategoryName", item.CategoryId);
-            ViewBag.BrandId = new SelectList(db.Brand, "BrandId", "BrandName", item.BrandId);
-            ViewBag.AddressId = new SelectList(db.Address, "AddressId", "AddressLine1", item.AddressId);
-            return View(item);
+            viewModel.Category = new SelectList(db.Category, "CategoryId", "CategoryName", "SelectedCategoryId");
+            viewModel.Brand = new SelectList(db.Brand, "BrandId", "BrandName", "SelectedBrandId");
+            viewModel.Address = new SelectList(db.Address, "AddressId", "AddressLine1", "SelectedAddressId");
+            viewModel.Costing = new SelectList(db.Costing, "CostingId", "Name", "SelectedCostingId");
+            viewModel.IdentityProof = new SelectList(db.Costing, "IdentityProofId", "Name", "SelectedIdentityProofId");
+
+            return View(viewModel);
         }
 
         //
