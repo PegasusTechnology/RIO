@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using RIO.Models;
 using RIO.Models.ViewModels;
+using System.Configuration;
+using RIO.Helpers;
+using System.IO;
 
 namespace RIO.Controllers
 {
@@ -61,6 +64,20 @@ namespace RIO.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (viewModel.Image != null)
+                {
+                    string uploadPath = Server.MapPath(ConfigurationHelper.UploadPath);
+
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+
+                    string fileName = string.Concat(Guid.NewGuid(), "_", viewModel.Image.FileName);
+                    string filePath = string.Concat(uploadPath, fileName);
+                    viewModel.Image.SaveAs(filePath);
+                    viewModel.ImagePath = string.Concat(ConfigurationHelper.UploadPath, fileName);
+                }
                 //db.Item.Add(viewModel);
                 //db.SaveChanges();
                 return RedirectToAction("Index", "Home", null);
