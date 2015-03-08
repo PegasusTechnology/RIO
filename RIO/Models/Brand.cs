@@ -23,8 +23,7 @@ namespace RIO.Models
 
         [DisplayName("Sort Order")]
         public int SortOrder { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion

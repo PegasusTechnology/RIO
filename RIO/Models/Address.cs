@@ -46,8 +46,7 @@ namespace RIO.Models
 
         [DisplayName("Set As Default")]
         public bool IsDefault { get; set; }
-
-        [DefaultValue(true)]
+       
         public bool IsActive { get; set; }
 
         #endregion

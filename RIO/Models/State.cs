@@ -30,8 +30,7 @@ namespace RIO.Models
         public int SortOrder { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion

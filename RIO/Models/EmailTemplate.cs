@@ -37,8 +37,7 @@ namespace RIO.Models
 
         [DataType(DataType.Html)]
         public string Body { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion

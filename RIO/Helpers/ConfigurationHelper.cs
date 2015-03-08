@@ -19,6 +19,22 @@ namespace RIO.Helpers
             }
         }
 
+        public static string ThumbnailWidth
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ThumbnailWidth"];
+            }
+        }
+
+        public static string ThumbnailHeight
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ThumbnailHeight"];
+            }
+        }
+
         #endregion
 
     }

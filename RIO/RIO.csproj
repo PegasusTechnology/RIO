@@ -205,7 +205,7 @@
     <Compile Include="Models\ItemRequest.cs" />
     <Compile Include="Models\ItemRequiredDocument.cs" />
     <Compile Include="Models\RIOConfiguration.cs" />
-    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\UsageLog.cs" />
     <Compile Include="Models\UserRating.cs" />

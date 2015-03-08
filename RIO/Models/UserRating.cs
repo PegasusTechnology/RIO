@@ -27,8 +27,7 @@ namespace RIO.Models
         public string Comment { get; set; }
 
         public bool ThumbsUp { get; set; }
-
-        [DefaultValue(true)]
+       
         public bool IsActive { get; set; }
 
         #endregion

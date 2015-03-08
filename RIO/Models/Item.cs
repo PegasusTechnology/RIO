@@ -12,6 +12,16 @@ namespace RIO.Models
     public class Item
     {
 
+        #region Constructors
+
+        public Item()
+        {
+            PostedDate = DateTime.Now;
+            IsActive = true;
+        }
+
+        #endregion
+
         #region Public Properties
 
         public int ItemId { get; set; }
@@ -54,8 +64,7 @@ namespace RIO.Models
         public virtual ICollection<ItemRequiredDocument> RequiredDocuments { get; set; }
 
         public virtual ICollection<ItemImage> Images { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion

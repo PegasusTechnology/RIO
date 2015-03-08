@@ -105,8 +105,7 @@ namespace RIO.Models
 
         [NotMapped]
         public int KarmaPoint { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion

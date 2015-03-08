@@ -10,6 +10,7 @@ using RIO.Models.ViewModels;
 using System.Configuration;
 using RIO.Helpers;
 using System.IO;
+using System.Web.Helpers;
 
 namespace RIO.Controllers
 {
@@ -64,6 +65,8 @@ namespace RIO.Controllers
         {
             if (ModelState.IsValid)
             {
+                Item item = new Item();
+
                 if (viewModel.Image != null)
                 {
                     string uploadPath = Server.MapPath(ConfigurationHelper.UploadPath);
@@ -77,9 +80,31 @@ namespace RIO.Controllers
                     string filePath = string.Concat(uploadPath, fileName);
                     viewModel.Image.SaveAs(filePath);
                     viewModel.ImagePath = string.Concat(ConfigurationHelper.UploadPath, fileName);
+                    item.Images = new List<ItemImage>();
+                    item.Images.Add(new ItemImage { ImagePath = viewModel.ImagePath });
+
+                    WebImage webImage = new WebImage(viewModel.Image.InputStream);
+                    webImage.Resize(Convert.ToInt32(ConfigurationHelper.ThumbnailWidth),
+                        Convert.ToInt32(ConfigurationHelper.ThumbnailHeight), preserveAspectRatio: true);
+                    webImage.Save(string.Concat(uploadPath, "Thumbnail_", fileName));
+                    item.Images.Add(new ItemImage
+                    {
+                        ImagePath = string.Concat(ConfigurationHelper.UploadPath, "Thumbnail_",
+                            fileName),
+                        IsThumbnail = true
+                    });
                 }
-                //db.Item.Add(viewModel);
-                //db.SaveChanges();
+
+                item.Category = db.Category.FirstOrDefault(p => p.CategoryId == viewModel.SelectedCategoryId);
+                item.Brand = db.Brand.FirstOrDefault(p => p.BrandId == viewModel.SelectedBrandId);
+                item.Address = db.Address.FirstOrDefault(p => p.AddressId == viewModel.SelectedAddressId);
+                item.ItemName = viewModel.ItemName;
+                item.ItemDescription = viewModel.ItemDescription;
+                item.Phone = viewModel.Phone.Value;
+
+                db.Item.Add(item);
+                db.SaveChanges();
+
                 return RedirectToAction("Index", "Home", null);
             }
 

@@ -22,6 +22,8 @@ namespace RIO.Models
         [StringLength(500)]
         public string ImagePath { get; set; }
 
+        public bool IsThumbnail { get; set; }
+
         #endregion
 
     }

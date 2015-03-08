@@ -31,8 +31,7 @@ namespace RIO.Models
         public int? ParentCategoryId { get; set; }
 
         public virtual Category ParentCategory { get; set; }
-
-        [DefaultValue(true)]
+       
         public bool IsActive { get; set; }
 
         #endregion

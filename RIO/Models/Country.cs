@@ -25,8 +25,7 @@ namespace RIO.Models
         public int SortOrder { get; set; }
 
         public virtual ICollection<State> States { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion

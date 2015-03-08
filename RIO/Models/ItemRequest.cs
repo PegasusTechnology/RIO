@@ -34,8 +34,7 @@ namespace RIO.Models
         public int Remarks { get; set; }
 
         public RequestStatus RequestStatus { get; set; }
-
-        [DefaultValue(true)]
+        
         public bool IsActive { get; set; }
 
         #endregion
