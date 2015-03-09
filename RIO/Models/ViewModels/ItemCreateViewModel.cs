@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RIO.Models.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -44,7 +45,7 @@ namespace RIO.Models.ViewModels
 
         public IEnumerable<SelectListItem> Costing { get; set; }
 
-        //[Required]
+        [Required]
         public int? SelectedCostingId { get; set; }
 
         public IEnumerable<SelectListItem> IdentityProof { get; set; }
@@ -53,6 +54,7 @@ namespace RIO.Models.ViewModels
 
         //public virtual ICollection<ItemImage> Images { get; set; }
 
+        [ValidateImage]
         public HttpPostedFileBase Image { get; set; }
 
         public string ImagePath { get; set; }

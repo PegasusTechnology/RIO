@@ -192,6 +192,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Attributes\ValidateImageAttribute.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Costing.cs" />

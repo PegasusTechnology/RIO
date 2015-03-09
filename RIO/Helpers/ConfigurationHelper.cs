@@ -11,11 +11,11 @@ namespace RIO.Helpers
 
         #region Protected Properties
 
-        public static string UploadPath
+        public static string UploadFolder
         {
             get
             {
-                return ConfigurationManager.AppSettings["UploadPath"];
+                return ConfigurationManager.AppSettings["UploadFolder"];
             }
         }
 
@@ -32,6 +32,22 @@ namespace RIO.Helpers
             get
             {
                 return ConfigurationManager.AppSettings["ThumbnailHeight"];
+            }
+        }
+
+        public static string MaximumImageSizeBytes
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["MaximumImageSizeBytes"];
+            }
+        }
+
+        public static string AllowedImageExtensions
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["AllowedImageExtensions"];
             }
         }
 

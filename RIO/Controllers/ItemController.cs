@@ -51,7 +51,7 @@ namespace RIO.Controllers
             viewModel.Brand = new SelectList(db.Brand, "BrandId", "BrandName", "SelectedBrandId");
             viewModel.Address = new SelectList(db.Address, "AddressId", "AddressLine1", "SelectedAddressId");
             viewModel.Costing = new SelectList(db.Costing, "CostingId", "Name", "SelectedCostingId");
-            viewModel.IdentityProof = new SelectList(db.Costing, "IdentityProofId", "Name", "SelectedIdentityProofId");
+            viewModel.IdentityProof = new SelectList(db.IdentityProof, "IdentityProofId", "Name", "SelectedIdentityProofId");
 
             return View(viewModel);
         }
@@ -65,36 +65,51 @@ namespace RIO.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Initializes the new item object
                 Item item = new Item();
 
+                // Logic for uploading image
                 if (viewModel.Image != null)
                 {
-                    string uploadPath = Server.MapPath(ConfigurationHelper.UploadPath);
+                    // Gets the root upload directory
+                    string uploadFolder = Server.MapPath(ConfigurationHelper.UploadFolder);
 
-                    if (!Directory.Exists(uploadPath))
+                    // Creates directory if doesn't exist
+                    if (!Directory.Exists(uploadFolder))
                     {
-                        Directory.CreateDirectory(uploadPath);
+                        Directory.CreateDirectory(uploadFolder);
                     }
 
+                    // Generates unique file name by using Guid
                     string fileName = string.Concat(Guid.NewGuid(), "_", viewModel.Image.FileName);
-                    string filePath = string.Concat(uploadPath, fileName);
+                    // Concatenates root upload folder and file name
+                    string filePath = string.Concat(uploadFolder, fileName);
+                    // Saves image to the path
                     viewModel.Image.SaveAs(filePath);
-                    viewModel.ImagePath = string.Concat(ConfigurationHelper.UploadPath, fileName);
+                    // Sets image path to view model
+                    viewModel.ImagePath = string.Concat(ConfigurationHelper.UploadFolder, fileName);
+                    // Initializes item images object
                     item.Images = new List<ItemImage>();
+                    // Adds the image to item image collection
                     item.Images.Add(new ItemImage { ImagePath = viewModel.ImagePath });
 
+                    // Logic for thumbnail image which can be used by search page
                     WebImage webImage = new WebImage(viewModel.Image.InputStream);
+                    // Resize image
                     webImage.Resize(Convert.ToInt32(ConfigurationHelper.ThumbnailWidth),
                         Convert.ToInt32(ConfigurationHelper.ThumbnailHeight), preserveAspectRatio: true);
-                    webImage.Save(string.Concat(uploadPath, "Thumbnail_", fileName));
+                    // Saves Thumbnail
+                    webImage.Save(string.Concat(uploadFolder, "Thumbnail_", fileName));
+                    // Adds Thumbnail image to item images collection with IsThumbnail flag true
                     item.Images.Add(new ItemImage
                     {
-                        ImagePath = string.Concat(ConfigurationHelper.UploadPath, "Thumbnail_",
+                        ImagePath = string.Concat(ConfigurationHelper.UploadFolder, "Thumbnail_",
                             fileName),
                         IsThumbnail = true
                     });
                 }
 
+                // Assign properties from view model to actual item model object
                 item.Category = db.Category.FirstOrDefault(p => p.CategoryId == viewModel.SelectedCategoryId);
                 item.Brand = db.Brand.FirstOrDefault(p => p.BrandId == viewModel.SelectedBrandId);
                 item.Address = db.Address.FirstOrDefault(p => p.AddressId == viewModel.SelectedAddressId);
@@ -102,7 +117,17 @@ namespace RIO.Controllers
                 item.ItemDescription = viewModel.ItemDescription;
                 item.Phone = viewModel.Phone.Value;
 
+                // Saves Costing
+                item.ItemCosting = new List<ItemCosting>();
+                item.ItemCosting.Add(new ItemCosting { CostingId = viewModel.SelectedCostingId.Value });
+
+                // Saves ID Proof
+                item.RequiredDocuments = new List<ItemRequiredDocument>();
+                item.RequiredDocuments.Add(new ItemRequiredDocument { IdentityProofId = viewModel.SelectedIdentityProofId.Value });
+
+                // Adds new item to db
                 db.Item.Add(item);
+                // Save changes
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home", null);
@@ -112,7 +137,7 @@ namespace RIO.Controllers
             viewModel.Brand = new SelectList(db.Brand, "BrandId", "BrandName", "SelectedBrandId");
             viewModel.Address = new SelectList(db.Address, "AddressId", "AddressLine1", "SelectedAddressId");
             viewModel.Costing = new SelectList(db.Costing, "CostingId", "Name", "SelectedCostingId");
-            viewModel.IdentityProof = new SelectList(db.Costing, "IdentityProofId", "Name", "SelectedIdentityProofId");
+            viewModel.IdentityProof = new SelectList(db.IdentityProof, "IdentityProofId", "Name", "SelectedIdentityProofId");
 
             return View(viewModel);
         }

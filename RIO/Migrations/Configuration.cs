@@ -30,6 +30,14 @@ namespace RIO.Migrations
                      new Brand { BrandName = "Yonex", SortOrder = 0, IsActive = true }
                    );
 
+            context.Costing.AddOrUpdate(p => p.Name,
+                new Costing { Name = "Daily", IsActive = true },
+                new Costing { Name = "Monthly", IsActive = true });
+
+            context.IdentityProof.AddOrUpdate(p => p.Name,
+                new IdentityProof { Name = "Passport", IsActive = true },
+                new IdentityProof { Name = "Driving License", IsActive = true });
+
             context.Country.AddOrUpdate(
                     p => p.CountryName,
                     new Country { CountryName = "India", IsActive = true },

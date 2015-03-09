@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using WebMatrix.WebData;
 
 namespace RIO.Models
 {
@@ -16,6 +17,7 @@ namespace RIO.Models
 
         public Item()
         {
+            //PostedUserId = WebSecurity.CurrentUserId;
             PostedDate = DateTime.Now;
             IsActive = true;
         }
@@ -41,6 +43,11 @@ namespace RIO.Models
 
         public virtual Address Address { get; set; }
 
+        [ForeignKey("User")]
+        public int? PostedUserId { get; set; }
+
+        public virtual User User { get; set; }
+
         [DisplayName("Item Name")]
         [Required]
         [StringLength(150)]
@@ -64,7 +71,7 @@ namespace RIO.Models
         public virtual ICollection<ItemRequiredDocument> RequiredDocuments { get; set; }
 
         public virtual ICollection<ItemImage> Images { get; set; }
-        
+
         public bool IsActive { get; set; }
 
         #endregion
