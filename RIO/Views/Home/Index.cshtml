@@ -31,7 +31,13 @@
     <div class="row">
         @foreach (var item in Model.Items)
         {
+            ItemImage thumbnailImage = (item.Images == null) ? null : item.Images.FirstOrDefault(p => p.IsThumbnail);   
+            
             <div class="col-md-3 col-sm-6">
+                @if (thumbnailImage != null)
+                {
+                    <img src= "@Url.Content(thumbnailImage.ImagePath)" alt="Item Thumbail" />
+                }
                 @Html.ActionLink(item.ItemName, "Details", "Item", new { id = item.ItemId }, null);               
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
                 @Html.DisplayFor(modelItem => item.Brand.BrandName)
