@@ -2,8 +2,8 @@
 
 <h2>Post Item</h2>
 
-@using(Html.BeginForm("Create", "Item", FormMethod.Post, 
-    new { enctype="multipart/form-data" })) 
+@using (Html.BeginForm("Create", "Item", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
@@ -73,8 +73,11 @@
             @Html.LabelFor(model => model.IdentityProof, "Identity Proof")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => Model.SelectedIdentityProofId, Model.IdentityProof)
-            @Html.ValidationMessageFor(model => model.SelectedIdentityProofId)
+            @foreach (IdentityProof idProof in Model.IdentityProof)
+            {               
+                <input type="checkbox" name="SelectedIdentityProofId" value="@idProof.IdentityProofId" title="@idProof.Name" /> 
+                @idProof.Name                         
+            }
         </div>
         <p>
             <input type="submit" value="Create" />

@@ -51,7 +51,7 @@ namespace RIO.Controllers
             viewModel.Brand = new SelectList(db.Brand, "BrandId", "BrandName", "SelectedBrandId");
             viewModel.Address = new SelectList(db.Address, "AddressId", "AddressLine1", "SelectedAddressId");
             viewModel.Costing = new SelectList(db.Costing, "CostingId", "Name", "SelectedCostingId");
-            viewModel.IdentityProof = new SelectList(db.IdentityProof, "IdentityProofId", "Name", "SelectedIdentityProofId");
+            viewModel.IdentityProof = db.IdentityProof;
 
             return View(viewModel);
         }
@@ -123,7 +123,14 @@ namespace RIO.Controllers
 
                 // Saves ID Proof
                 item.RequiredDocuments = new List<ItemRequiredDocument>();
-                item.RequiredDocuments.Add(new ItemRequiredDocument { IdentityProofId = viewModel.SelectedIdentityProofId.Value });
+
+                if (viewModel.SelectedIdentityProofId != null)
+                {
+                    foreach (int id in viewModel.SelectedIdentityProofId)
+                    {
+                        item.RequiredDocuments.Add(new ItemRequiredDocument { IdentityProofId = id });
+                    }
+                }
 
                 // Adds new item to db
                 db.Item.Add(item);
@@ -137,7 +144,7 @@ namespace RIO.Controllers
             viewModel.Brand = new SelectList(db.Brand, "BrandId", "BrandName", "SelectedBrandId");
             viewModel.Address = new SelectList(db.Address, "AddressId", "AddressLine1", "SelectedAddressId");
             viewModel.Costing = new SelectList(db.Costing, "CostingId", "Name", "SelectedCostingId");
-            viewModel.IdentityProof = new SelectList(db.IdentityProof, "IdentityProofId", "Name", "SelectedIdentityProofId");
+            viewModel.IdentityProof = db.IdentityProof;
 
             return View(viewModel);
         }

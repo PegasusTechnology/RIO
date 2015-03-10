@@ -48,9 +48,9 @@ namespace RIO.Models.ViewModels
         [Required]
         public int? SelectedCostingId { get; set; }
 
-        public IEnumerable<SelectListItem> IdentityProof { get; set; }
+        public IEnumerable<IdentityProof> IdentityProof { get; set; }        
 
-        public int? SelectedIdentityProofId { get; set; }
+        public int[] SelectedIdentityProofId { get; set; }
 
         //public virtual ICollection<ItemImage> Images { get; set; }
 
